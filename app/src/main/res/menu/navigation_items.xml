@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/Fingerprint"
+        android:icon="@drawable/ic_zhiwen"
+        android:title="Fingerprint"/>
+    <item
+        android:id="@+id/Eye"
+        android:icon="@drawable/ic_eye"
+        android:title="Eye"/>
+    <item
+        android:id="@+id/Voice"
+        android:icon="@drawable/ic_tack"
+        android:title="Voice"/>
+
+
+
+
+</menu>

@@ -1,0 +1,86 @@
+plugins {
+    id 'com.android.application'
+    id 'stringfog'
+    id 'android-junk-code'
+
+}
+// 导入RandomKeyGenerator类，如果使用HardCodeKeyGenerator，更换下类名
+import com.github.megatronking.stringfog.plugin.kg.RandomKeyGenerator
+import com.github.megatronking.stringfog.plugin.StringFogMode
+
+android {
+    compileSdk 34
+    namespace 'net.instrument.free.utility.liedetectors'
+    defaultConfig {
+        applicationId "net.instrument.free.utility.liedetectors"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    androidJunkCode {
+        variantConfig {
+            release {
+//注意：这里的release是变体名称，如果没有设置productFlavors就是buildType名称，如果有设置productFlavors就是flavor+buildType，例如（freeRelease、proRelease）
+                packageBase = "net.instrument.free.utility.liedetectors"  //生成java类根包名
+                packageCount = 30 //生成包数量xfghjk
+                activityCountPerPackage = 3 //每个包下生成Activity类数量
+                excludeActivityJavaFile = false
+                //是否排除生成Activity的Java文件,默认false(layout和写入AndroidManifest.xml还会执行)，主要用于处理类似神策全埋点编译过慢问题
+                otherCountPerPackage = 50  //每个包下生成其它类的数量
+                methodCountPerClass = 20  //每个类下生成方法数量
+                resPrefix = "my_"  //生成的layout、drawable、string等资源名前缀
+                drawableCount = 300  //生成drawable资源数量
+                stringCount = 300  //生成string数量
+            }
+        }
+    }
+    buildFeatures {
+        buildConfig = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildToolsVersion '33.0.0'
+    ndkVersion '25.1.8937393'
+    compileSdk 34
+}
+stringfog {
+    // 必要：加解密库的实现类路径，需和上面配置的加解密算法库一致。
+    implementation 'com.github.megatronking.stringfog.xor.StringFogImpl'
+    // 可选：StringFog会自动尝试获取packageName，如果遇到获取失败的情况，可以显式地指定。
+    packageName 'com.github.megatronking.stringfog.app'
+    // 可选：加密开关，默认开启。
+    enable true
+    // 可选：指定需加密的代码包路径，可配置多个，未指定将默认全部加密。
+    //fogPackages = ['com.xxx.xxx']
+    // 可选（3.0版本新增）：指定密钥生成器，默认使用长度8的随机密钥（每个字符串均有不同随机密钥）,
+    // 也可以指定一个固定的密钥：HardCodeKeyGenerator("This is a key")
+    kg new RandomKeyGenerator()
+    // 可选（4.0版本新增）：用于控制字符串加密后在字节码中的存在形式, 默认为base64，
+    // 也可以使用text或者bytes
+    mode StringFogMode.base64
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation 'com.github.megatronking.stringfog:xor:5.0.0'
+    implementation 'com.tencent:mmkv:1.3.1'
+}

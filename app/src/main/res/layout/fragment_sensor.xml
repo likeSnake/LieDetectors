@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradual_color_bg"
+    android:fitsSystemWindows="true"
+    >
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="170dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:text="Please Hold For More Than 3 Seconds"
+        android:textSize="18sp"
+        android:background="@drawable/text_sharp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/image_yuan"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_above="@+id/bt_zhiwen"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_yuan"/>
+
+
+
+        <ImageView
+            android:id="@+id/bt_zhiwen"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="70dp"
+            android:src="@drawable/zhiwen" />
+
+        <ImageView
+            android:id="@+id/ic_scan"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:src="@drawable/icon_scans" />
+
+
+
+</RelativeLayout>
